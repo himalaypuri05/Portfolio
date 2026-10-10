@@ -20,21 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
    -------------------------------------------------------------------------- */
 function getThemeParticleColor() {
   const theme = document.documentElement.getAttribute('data-theme') || 'light';
-  switch (theme) {
-    case 'light':
-      return { r: 37, g: 99, b: 235, lineAlpha: 0.1, starAlpha: 0.25 };
-    case 'emerald':
-      return { r: 16, g: 185, b: 129, lineAlpha: 0.12, starAlpha: 0.35 };
-    case 'amber':
-    case 'gold':
-      return { r: 245, g: 158, b: 11, lineAlpha: 0.12, starAlpha: 0.35 };
-    case 'obsidian':
-    case 'monochrome':
-      return { r: 203, g: 213, b: 225, lineAlpha: 0.1, starAlpha: 0.3 };
-    case 'midnight':
-    default:
-      return { r: 99, g: 102, b: 241, lineAlpha: 0.12, starAlpha: 0.35 };
+  if (theme === 'dark') {
+    return { r: 99, g: 102, b: 241, lineAlpha: 0.14, starAlpha: 0.35 };
   }
+  return { r: 37, g: 99, b: 235, lineAlpha: 0.1, starAlpha: 0.25 };
 }
 
 function initParticleCanvas() {
@@ -172,69 +161,51 @@ function playSynthSound(freq = 440, duration = 0.05, type = 'sine') {
 }
 
 /* --------------------------------------------------------------------------
-   Curated Theme Controller & LocalStorage Persistence
+   2-Theme Controller (Light Default & Dark Toggle)
    -------------------------------------------------------------------------- */
 function initSavedTheme() {
   try {
     const saved = localStorage.getItem('portfolio-theme');
-    if (saved) {
-      setThemeMode(saved);
-    }
-  } catch (e) {}
-}
-
-function toggleThemeHUD() {
-  const panel = document.getElementById('theme-panel');
-  const btn = document.getElementById('theme-btn');
-  if (panel) {
-    panel.classList.toggle('show');
-    if (btn) btn.classList.toggle('open');
-    if (soundEnabled) playSynthSound(587.33, 0.05, 'sine');
+    const currentTheme = saved === 'dark' ? 'dark' : 'light';
+    applyTheme(currentTheme, false);
+  } catch (e) {
+    applyTheme('light', false);
   }
 }
 
-document.addEventListener('click', (e) => {
-  const panel = document.getElementById('theme-panel');
-  const btn = document.getElementById('theme-btn');
-  if (panel && panel.classList.contains('show')) {
-    if (!panel.contains(e.target) && !btn.contains(e.target)) {
-      panel.classList.remove('show');
-      if (btn) btn.classList.remove('open');
-    }
-  }
-});
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next, true);
+}
 
-function setThemeMode(themeId) {
-  const activeTheme = themeId;
+function applyTheme(theme, notify = true) {
+  const isDark = theme === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 
-  document.documentElement.setAttribute('data-theme', activeTheme);
   try {
-    localStorage.setItem('portfolio-theme', activeTheme);
+    localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');
   } catch (e) {}
 
-  document.querySelectorAll('.theme-opt-btn').forEach(btn => {
-    btn.classList.remove('active');
-    const bTheme = btn.getAttribute('data-theme-id');
-    if (bTheme === activeTheme) {
-      btn.classList.add('active');
-    }
-  });
+  const icon = document.getElementById('theme-toggle-icon');
+  const label = document.getElementById('theme-toggle-label');
+  const toggleBtn = document.getElementById('theme-toggle');
 
-  const themeNames = {
-    midnight: 'Midnight Indigo 🌌',
-    obsidian: 'Obsidian Luxe 💎',
-    emerald: 'Emerald Sage 🍃',
-    amber: 'Royal Champagne ✨',
-    light: 'Studio Light ☀️'
-  };
+  if (icon) {
+    icon.className = isDark ? 'fa-solid fa-sun theme-toggle-icon' : 'fa-solid fa-moon theme-toggle-icon';
+  }
+  if (label) {
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  if (toggleBtn) {
+    toggleBtn.setAttribute('title', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+    toggleBtn.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+  }
 
-  if (soundEnabled) playSynthSound(783.99, 0.08, 'sine');
-  showToast(themeNames[activeTheme] || 'Theme Activated');
-
-  const panel = document.getElementById('theme-panel');
-  const btn = document.getElementById('theme-btn');
-  if (panel) panel.classList.remove('show');
-  if (btn) btn.classList.remove('open');
+  if (notify) {
+    if (soundEnabled) playSynthSound(isDark ? 520 : 680, 0.08, 'sine');
+    showToast(isDark ? '🌙 Dark Mode Activated' : '☀️ Light Mode Activated');
+  }
 }
 
 /* --------------------------------------------------------------------------

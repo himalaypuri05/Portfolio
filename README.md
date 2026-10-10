@@ -4,7 +4,7 @@ An interactive, modern portfolio showcasing full-stack projects, skills, experie
 
 ## ✨ Features
 
-- 🎨 **Multi-Theme Engine**: Switch between 5 themes (Midnight Indigo, Obsidian Luxe, Emerald Sage, Royal Champagne, and Studio Light).
+- 🎨 **Theme Engine**: Clean Studio Light (default) & Sleek Modern Dark mode with instant toggle and persistent state.
 - 🌌 **Interactive Particle Canvas**: Fluid particle mesh background that reacts to mouse interaction and adapts to theme colors.
 - ⚡ **Interactive Terminal HUD**: Simulated developer CLI with custom commands (`help`, `about`, `skills`, `projects`, `contact`, `clear`, etc.).
 - 🔊 **Web Audio Synth Effects**: Optional sound effects for UI interactions.
