@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Himalay Puri | Full Stack Developer</title>
+  <meta name="description" content="Portfolio of Himalay Puri, a Full Stack Developer experienced in React.js, Node.js, Express.js, REST APIs, MySQL, MongoDB, authentication, and modern web development.">
+  <meta name="keywords" content="Himalay Puri, Full Stack Developer, Software Engineer, React Developer, Node.js, Express.js, Portfolio, Web Developer">
+  <meta name="author" content="Himalay Puri">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Himalay Puri | Full Stack Developer">
+  <meta property="og:description" content="Portfolio of Himalay Puri, a Full Stack Developer experienced in React.js, Node.js, Express.js, REST APIs, MySQL, MongoDB, authentication, and modern web development.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Dynamic Particle Canvas Background -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="logo">
+        <span class="logo-dot"></span> HIMALAY PURI <span class="logo-tag">DEV</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#hackathon" class="nav-link">Hackathon</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#terminal" class="nav-link">Terminal</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-controls">
+        <!-- Curated Theme Selector -->
+        <button class="theme-palette-btn" id="theme-btn" onclick="toggleThemeHUD()" title="Select Theme Palette" aria-label="Select Theme">
+          <i class="fa-solid fa-palette palette-icon"></i> <span style="font-weight: 500;">Theme</span>
+          <i class="fa-solid fa-chevron-down theme-caret"></i>
+        </button>
+
+        <!-- Floating Curated Theme Menu Panel -->
+        <div class="theme-menu-panel" id="theme-panel">
+          <div class="theme-menu-header">
+            <span>Curated Themes</span>
+            <i class="fa-solid fa-sliders"></i>
+          </div>
+          <div class="theme-options">
+            <button class="theme-opt-btn" data-theme-id="midnight" onclick="setThemeMode('midnight')">
+              <div class="theme-opt-left">
+                <span class="theme-color-preview preview-midnight"></span>
+                <div>
+                  <span class="theme-opt-name">Midnight Indigo</span>
+                  <span class="theme-opt-desc">Royal Indigo & Slate</span>
+                </div>
+              </div>
+              <i class="fa-solid fa-check theme-check-icon"></i>
+            </button>
+            <button class="theme-opt-btn" data-theme-id="obsidian" onclick="setThemeMode('obsidian')">
+              <div class="theme-opt-left">
+                <span class="theme-color-preview preview-obsidian"></span>
+                <div>
+                  <span class="theme-opt-name">Obsidian Luxe</span>
+                  <span class="theme-opt-desc">Minimalist Platinum</span>
+                </div>
+              </div>
+              <i class="fa-solid fa-check theme-check-icon"></i>
+            </button>
+            <button class="theme-opt-btn" data-theme-id="emerald" onclick="setThemeMode('emerald')">
+              <div class="theme-opt-left">
+                <span class="theme-color-preview preview-emerald"></span>
+                <div>
+                  <span class="theme-opt-name">Emerald Sage</span>
+                  <span class="theme-opt-desc">Deep Forest & Mint</span>
+                </div>
+              </div>
+              <i class="fa-solid fa-check theme-check-icon"></i>
+            </button>
+            <button class="theme-opt-btn" data-theme-id="amber" onclick="setThemeMode('amber')">
+              <div class="theme-opt-left">
+                <span class="theme-color-preview preview-amber"></span>
+                <div>
+                  <span class="theme-opt-name">Royal Champagne</span>
+                  <span class="theme-opt-desc">Warm Titanium & Amber</span>
+                </div>
+              </div>
+              <i class="fa-solid fa-check theme-check-icon"></i>
+            </button>
+            <button class="theme-opt-btn active" data-theme-id="light" onclick="setThemeMode('light')">
+              <div class="theme-opt-left">
+                <span class="theme-color-preview preview-light"></span>
+                <div>
+                  <span class="theme-opt-name">Studio Light</span>
+                  <span class="theme-opt-desc">Clean Editorial White</span>
+                </div>
+              </div>
+              <i class="fa-solid fa-check theme-check-icon"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sound FX Synth Toggle -->
+        <button class="sound-toggle-btn" id="sound-btn" title="Toggle Synth Sound Effects" onclick="toggleSound()">
+          <i class="fa-solid fa-volume-high" id="sound-icon"></i>
+        </button>
+
+        <a href="#contact" class="btn btn-primary btn-sm">Contact Me</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge-status">
+          <span class="pulse-dot"></span> Full Stack Developer &amp; Software Engineer
+        </div>
+        <h1 class="hero-title">
+          Full Stack <br>
+          <span class="gradient-text hero-gradient-text">Developer</span>
+        </h1>
+        <div class="hero-subtitle">
+          <span style="color: var(--text-muted);">$> </span>
+          <span class="typing-text" id="typing-element">Full Stack Developer</span>
+        </div>
+        <p class="hero-description">
+          Computer Science Engineering graduate with hands-on experience building full-stack web applications, REST APIs, authentication systems, database-driven applications, and responsive user interfaces.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary btn-glow">
+            View Projects <i class="fa-solid fa-arrow-down"></i>
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            Contact Me <i class="fa-solid fa-envelope"></i>
+          </a>
+        </div>
+
+        <div class="social-links">
+          <a href="https://github.com/himalaypuri05" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/himalaypuri05" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="mailto:himalaypuri05@gmail.com" class="social-link" title="Email">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+          <a href="tel:+916260764761" class="social-link" title="Phone">
+            <i class="fa-solid fa-phone"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-avatar-container">
+        <div class="hero-avatar-wrapper tilt-element">
+          <img src="assets/avatar.jpg" alt="Himalay Puri Avatar" class="hero-avatar-img">
+          
+          <div class="tech-pill tech-pill-1">
+            <i class="fa-brands fa-react" style="color: #61dafb;"></i> React.js
+          </div>
+          <div class="tech-pill tech-pill-2">
+            <i class="fa-brands fa-node-js" style="color: #68a063;"></i> Node &amp; Express
+          </div>
+          <div class="tech-pill tech-pill-3">
+            <i class="fa-solid fa-database" style="color: var(--accent-primary);"></i> MySQL &amp; MongoDB
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">// ABOUT ME</span>
+        <h2 class="section-title">Driven by Engineering <span class="gradient-text">Excellence</span></h2>
+        <p class="section-desc">Full-stack web developer experienced in building scalable applications, APIs, and modern user interfaces.</p>
+      </div>
+
+      <div class="summary-card tilt-element">
+        <div class="glow-orb"></div>
+        <p class="summary-text">
+          Computer Science Engineering graduate with hands-on experience in <strong>Full Stack Web Development</strong>. Currently working as a Full Stack Developer at <strong>Botivate Services LLP</strong> and actively looking for Full Stack Developer / Software Engineer opportunities. Proficient in <strong>React.js, JavaScript, Node.js, Express.js</strong>, with strong expertise in building <strong>REST APIs, API integrations, MySQL, MongoDB, Supabase</strong>, authentication, authorization, RBAC, CRUD operations, responsive web design, production applications, and Git/GitHub workflows.
+        </p>
+
+        <div class="quick-stats">
+          <div class="stat-item">
+            <div class="stat-number gradient-text">Full Stack</div>
+            <div class="stat-label">Botivate Services LLP</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number gradient-text">B.Tech CSE</div>
+            <div class="stat-label">First Division (CSVTU)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number gradient-text">3</div>
+            <div class="stat-label">Production Projects</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number gradient-text">REST APIs</div>
+            <div class="stat-label">Auth, RBAC &amp; Databases</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Skills Section -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">// TECHNICAL SKILLS</span>
+        <h2 class="section-title">Skills &amp; <span class="gradient-text">Technologies</span></h2>
+        <p class="section-desc">Categorized technical expertise across frontend, backend, databases, developer tools, and AI workflows.</p>
+      </div>
+
+      <div class="skills-categories">
+        <!-- Languages -->
+        <div class="skill-category-card tilt-element">
+          <h3 class="category-title">
+            <i class="fa-solid fa-code category-icon"></i> Languages
+          </h3>
+          <div class="skill-tags">
+            <span class="skill-tag highlight"><i class="fa-brands fa-js"></i> JavaScript</span>
+            <span class="skill-tag"><i class="fa-brands fa-python"></i> Python</span>
+            <span class="skill-tag"><i class="fa-brands fa-php"></i> PHP</span>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="skill-category-card tilt-element">
+          <h3 class="category-title">
+            <i class="fa-solid fa-desktop category-icon"></i> Frontend
+          </h3>
+          <div class="skill-tags">
+            <span class="skill-tag highlight"><i class="fa-brands fa-react"></i> React.js</span>
+            <span class="skill-tag">React Router</span>
+            <span class="skill-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
+            <span class="skill-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+            <span class="skill-tag">Tailwind CSS</span>
+            <span class="skill-tag"><i class="fa-brands fa-bootstrap"></i> Bootstrap</span>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="skill-category-card tilt-element">
+          <h3 class="category-title">
+            <i class="fa-solid fa-server category-icon"></i> Backend
+          </h3>
+          <div class="skill-tags">
+            <span class="skill-tag highlight"><i class="fa-brands fa-node-js"></i> Node.js</span>
+            <span class="skill-tag">Express.js</span>
+            <span class="skill-tag">Flask</span>
+          </div>
+        </div>
+
+        <!-- Databases -->
+        <div class="skill-category-card tilt-element">
+          <h3 class="category-title">
+            <i class="fa-solid fa-database category-icon"></i> Databases
+          </h3>
+          <div class="skill-tags">
+            <span class="skill-tag highlight">MySQL</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">Supabase</span>
+          </div>
+        </div>
+
+        <!-- Web / Backend Concepts -->
+        <div class="skill-category-card tilt-element">
+          <h3 class="category-title">
+            <i class="fa-solid fa-gears category-icon"></i> Web / Backend Concepts
+          </h3>
+          <div class="skill-tags">
+            <span class="skill-tag highlight">RESTful APIs</span>
+            <span class="skill-tag">JWT Authentication</span>
+            <span class="skill-tag">Authorization</span>
+            <span class="skill-tag">Role-Based Access Control (RBAC)</span>
+            <span class="skill-tag">CRUD Operations</span>
+            <span class="skill-tag">API Integration</span>
+            <span class="skill-tag">MVC Architecture</span>
+          </div>
+        </div>
+
+        <!-- Developer Tools -->
+        <div class="skill-category-card tilt-element">
+          <h3 class="category-title">
+            <i class="fa-solid fa-wrench category-icon"></i> Developer Tools
+          </h3>
+          <div class="skill-tags">
+            <span class="skill-tag"><i class="fa-brands fa-git-alt"></i> Git</span>
+            <span class="skill-tag"><i class="fa-brands fa-github"></i> GitHub</span>
+            <span class="skill-tag">Postman</span>
+            <span class="skill-tag">VS Code</span>
+            <span class="skill-tag">Vercel</span>
+            <span class="skill-tag">Render</span>
+            <span class="skill-tag highlight">Google Antigravity</span>
+          </div>
+        </div>
+
+        <!-- AI Development Tools -->
+        <div class="skill-category-card tilt-element" style="grid-column: span 1;">
+          <h3 class="category-title">
+            <i class="fa-solid fa-brain category-icon"></i> AI Development Tools
+          </h3>
+          <div class="skill-tags">
+            <span class="skill-tag highlight"><i class="fa-brands fa-github"></i> GitHub Copilot</span>
+            <span class="skill-tag">OpenAI Codex</span>
+            <span class="skill-tag"><i class="fa-solid fa-sparkles"></i> Google Gemini</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Experience Section -->
+  <section class="experience" id="experience">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">// CAREER HISTORY</span>
+        <h2 class="section-title">Work <span class="gradient-text">Experience</span></h2>
+        <p class="section-desc">Hands-on software development across production business applications and APIs.</p>
+      </div>
+
+      <div class="timeline">
+        <!-- Experience Item 1 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content tilt-element">
+            <div class="timeline-header">
+              <div>
+                <h3 class="company-title">Botivate Services LLP</h3>
+                <span class="role-badge">Full Stack Developer</span>
+              </div>
+              <span class="timeline-date"><i class="fa-regular fa-calendar"></i> Jul 2026 – Present</span>
+            </div>
+            <ul class="timeline-bullets">
+              <li>Develop and maintain full-stack business applications using React.js, Node.js, Express.js, MySQL, and RESTful APIs.</li>
+              <li>Contribute to production modules including Sapid System and Bhatia Enterprises applications.</li>
+              <li>Integrate third-party services including Meta API and eSSL biometric systems.</li>
+              <li>Develop CRUD workflows, authentication, database operations, API integrations, and responsive interfaces.</li>
+              <li>Debug application issues, resolve functional bugs, and improve application workflows.</li>
+              <li>Use Git and GitHub for version control and team collaboration.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Experience Item 2 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content tilt-element">
+            <div class="timeline-header">
+              <div>
+                <h3 class="company-title">IIIT Naya Raipur</h3>
+                <span class="role-badge">Project Trainee</span>
+              </div>
+              <span class="timeline-date"><i class="fa-regular fa-calendar"></i> Jun 2025 – Jul 2025</span>
+            </div>
+            <ul class="timeline-bullets">
+              <li>Developed a resume analysis web application supporting PDF, DOCX, and TXT processing.</li>
+              <li>Built Flask APIs and integrated frontend components for resume data processing.</li>
+              <li>Performed debugging, testing, and application workflow improvements.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">// FEATURED WORK</span>
+        <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+        <p class="section-desc">Technical implementations of full-stack web applications, authentication, and REST APIs.</p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1: FIFA ALL STARS (Latest / Featured) -->
+        <div class="project-card featured tilt-element" onclick="openProjectModal('fifaallstars')">
+          <span class="featured-badge"><i class="fa-solid fa-star"></i> Latest Project</span>
+          <div class="card-glass-shine"></div>
+          <div>
+            <div class="project-thumb-container">
+              <img src="assets/fifa_all_stars_thumb.jpg" alt="FIFA ALL STARS Thumbnail" class="project-thumb-img">
+            </div>
+            <div class="project-top">
+              <i class="fa-solid fa-futbol project-folder-icon"></i>
+              <div class="project-links" onclick="event.stopPropagation();">
+                <a href="https://turf-nation-pi.vercel.app/login" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <button class="project-icon-link btn-modal-trigger" onclick="openProjectModal('fifaallstars')" title="View Modal Details"><i class="fa-solid fa-expand"></i></button>
+              </div>
+            </div>
+            <h3 class="project-name">FIFA ALL STARS</h3>
+            <p class="project-subtitle-text" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-primary); margin-bottom: 12px;">Grassroots Footy Match Hub</p>
+            <ul class="project-bullets">
+              <li>Implemented authentication, authorization, and role-based access control (RBAC) for secure feature access.</li>
+              <li>Developed CRUD workflows, protected routes, RESTful APIs, and responsive interfaces for application data.</li>
+            </ul>
+          </div>
+          <div class="project-tech-stack">
+            <span class="tech-tag">React.js</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Express.js</span>
+            <span class="tech-tag">REST APIs</span>
+            <span class="tech-tag">Authentication</span>
+            <span class="tech-tag">RBAC</span>
+          </div>
+        </div>
+
+        <!-- Project 2: iNotebook -->
+        <div class="project-card tilt-element" onclick="openProjectModal('inotebook')">
+          <div class="card-glass-shine"></div>
+          <div>
+            <div class="project-thumb-container">
+              <img src="assets/inotebook_thumb.jpg" alt="iNotebook Project Thumbnail" class="project-thumb-img">
+            </div>
+            <div class="project-top">
+              <i class="fa-regular fa-folder-open project-folder-icon"></i>
+              <div class="project-links" onclick="event.stopPropagation();">
+                <a href="https://github.com/himalaypuri05/iNoteBook" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="GitHub Code"><i class="fa-brands fa-github"></i></a>
+                <a href="https://i-note-book-pi.vercel.app/signup" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <button class="project-icon-link btn-modal-trigger" onclick="openProjectModal('inotebook')" title="View Modal Details"><i class="fa-solid fa-expand"></i></button>
+              </div>
+            </div>
+            <h3 class="project-name">iNotebook</h3>
+            <p class="project-subtitle-text" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-primary); margin-bottom: 12px;">Note Management System</p>
+            <ul class="project-bullets">
+              <li>Implemented JWT authentication, protected routes, authorization, and CRUD operations for user-specific notes.</li>
+              <li>Built RESTful APIs with Express.js and MongoDB for secure user data and note management.</li>
+            </ul>
+          </div>
+          <div class="project-tech-stack">
+            <span class="tech-tag">React.js</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Express.js</span>
+            <span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">JWT</span>
+          </div>
+        </div>
+
+        <!-- Project 3: NewsMonkey -->
+        <div class="project-card tilt-element" onclick="openProjectModal('newsmonkey')">
+          <div class="card-glass-shine"></div>
+          <div>
+            <div class="project-thumb-container">
+              <img src="assets/newsmonkey_thumb.jpg" alt="NewsMonkey Project Thumbnail" class="project-thumb-img">
+            </div>
+            <div class="project-top">
+              <i class="fa-regular fa-newspaper project-folder-icon"></i>
+              <div class="project-links" onclick="event.stopPropagation();">
+                <a href="https://github.com/himalaypuri05/NewsMonkey" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="GitHub Code"><i class="fa-brands fa-github"></i></a>
+                <a href="https://news-monkey-two-theta.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-icon-link" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <button class="project-icon-link btn-modal-trigger" onclick="openProjectModal('newsmonkey')" title="View Modal Details"><i class="fa-solid fa-expand"></i></button>
+              </div>
+            </div>
+            <h3 class="project-name">NewsMonkey</h3>
+            <p class="project-subtitle-text" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-primary); margin-bottom: 12px;">News Aggregator</p>
+            <ul class="project-bullets">
+              <li>Integrated REST APIs with React.js for dynamic news retrieval, category filtering, and asynchronous data handling.</li>
+              <li>Implemented infinite scrolling and responsive UI for efficient content loading.</li>
+            </ul>
+          </div>
+          <div class="project-tech-stack">
+            <span class="tech-tag">React.js</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">REST APIs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hackathon Section -->
+  <section class="hackathon-section" id="hackathon">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">// HACKATHONS & COMPETITIONS</span>
+        <h2 class="section-title">Hackathon <span class="gradient-text">Experience</span></h2>
+        <p class="section-desc">Collaborative fast-paced development and technology concept design.</p>
+      </div>
+
+      <div class="hackathon-card tilt-element">
+        <div class="hackathon-badge-col">
+          <i class="fa-solid fa-trophy hackathon-icon"></i>
+          <h3 class="hackathon-title">HackIndia Hackathon</h3>
+          <span class="hackathon-role">Participant</span>
+        </div>
+        <div>
+          <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 16px;">
+            Contributed to a team-based Web3 Digital Art Marketplace concept involving frontend development, UI/UX, Ethereum, and NFTs.
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <span class="tech-tag">Frontend Development</span>
+            <span class="tech-tag">UI/UX</span>
+            <span class="tech-tag">Ethereum</span>
+            <span class="tech-tag">NFTs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section class="education" id="education">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">// ACADEMICS</span>
+        <h2 class="section-title">Education <span class="gradient-text">Background</span></h2>
+        <p class="section-desc">Academic foundation in Computer Science &amp; Engineering.</p>
+      </div>
+
+      <div class="summary-card tilt-element" style="max-width: 800px; margin: 0 auto;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+          <div>
+            <h3 style="font-size: 1.4rem; color: var(--text-main);">Bachelor of Technology (B.Tech) in Computer Science Engineering</h3>
+            <p style="color: var(--accent-primary); font-family: var(--font-mono); font-size: 0.95rem; margin-top: 4px;">
+              Chhattisgarh Swami Vivekanand Technical University (CSVTU)
+            </p>
+          </div>
+          <span class="role-badge" style="font-size: 0.9rem; padding: 6px 16px;">First Division</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6;">
+          Graduated with First Division honours (2022 – 2026). Rigorous coursework covering Computer Science Engineering, Software Engineering principles, Database Management Systems, and Web Application Architecture.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Terminal Section -->
+  <section class="terminal-section" id="terminal">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">// DEVELOPER COMMAND SHELL</span>
+        <h2 class="section-title">Interactive <span class="gradient-text">CLI Terminal</span></h2>
+        <p class="section-desc">Type commands or click quick action buttons below to query Himalay Puri's profile.</p>
+      </div>
+
+      <div class="terminal-wrapper tilt-element">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="terminal-dot dot-red"></span>
+            <span class="terminal-dot dot-yellow"></span>
+            <span class="terminal-dot dot-green"></span>
+          </div>
+          <span class="terminal-title">himalaypuri@dev-terminal:~</span>
+          <span style="font-size: 0.75rem; color: var(--accent-tertiary);">zsh</span>
+        </div>
+
+        <div class="terminal-quick-cmds">
+          <button class="term-btn" onclick="runTermCmd('help')">help</button>
+          <button class="term-btn" onclick="runTermCmd('skills')">skills</button>
+          <button class="term-btn" onclick="runTermCmd('experience')">experience</button>
+          <button class="term-btn" onclick="runTermCmd('projects')">projects</button>
+          <button class="term-btn" onclick="runTermCmd('hackathon')">hackathon</button>
+          <button class="term-btn" onclick="runTermCmd('education')">education</button>
+          <button class="term-btn" onclick="runTermCmd('contact')">contact</button>
+        </div>
+
+        <div class="terminal-body" id="terminal-body">
+          <div class="term-line">System initialized. Welcome to Himalay Puri's Interactive Developer Terminal.</div>
+          <div class="term-line">Type <span style="color: var(--accent-tertiary);">`help`</span> or click quick command buttons to query profile data.</div>
+          <div class="term-line">----------------------------------------------------------------------</div>
+        </div>
+
+        <div class="term-input-line">
+          <span class="term-prompt">himalay@dev:~$</span>
+          <input type="text" id="term-input" class="term-input" placeholder="type 'help', 'skills', 'projects', 'contact'..." autocomplete="off">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">// CONNECT WITH ME</span>
+        <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+        <p class="section-desc">Actively looking for Full Stack Developer / Software Engineer opportunities.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact Info Card -->
+        <div class="contact-info-card tilt-element">
+          <h3 style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 24px;">Contact Information</h3>
+
+          <div class="contact-method">
+            <div class="contact-left">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <div class="contact-label">Email Address</div>
+                <div class="contact-value">himalaypuri05@gmail.com</div>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyText('himalaypuri05@gmail.com', 'Email address copied!')">Copy</button>
+          </div>
+
+          <div class="contact-method">
+            <div class="contact-left">
+              <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div>
+                <div class="contact-label">Phone Number</div>
+                <div class="contact-value">+91 6260764761</div>
+              </div>
+            </div>
+            <button class="copy-btn" onclick="copyText('+916260764761', 'Phone number copied!')">Copy</button>
+          </div>
+
+          <div class="contact-method">
+            <div class="contact-left">
+              <div class="contact-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+              <div>
+                <div class="contact-label">LinkedIn</div>
+                <div class="contact-value">linkedin.com/in/himalaypuri05</div>
+              </div>
+            </div>
+            <a href="https://www.linkedin.com/in/himalaypuri05" target="_blank" rel="noopener noreferrer" class="copy-btn" style="text-decoration:none;">Visit</a>
+          </div>
+
+          <div class="contact-method">
+            <div class="contact-left">
+              <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
+              <div>
+                <div class="contact-label">GitHub</div>
+                <div class="contact-value">github.com/himalaypuri05</div>
+              </div>
+            </div>
+            <a href="https://github.com/himalaypuri05" target="_blank" rel="noopener noreferrer" class="copy-btn" style="text-decoration:none;">Visit</a>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <form class="contact-form tilt-element" id="contact-form">
+          <h3 style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 24px;">Send a Message</h3>
+
+          <div class="form-group">
+            <label class="form-label" for="name">Your Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Name" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Your Email</label>
+            <input type="email" id="email" class="form-control" placeholder="Email" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea id="message" class="form-control" placeholder="Your Message..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-glow" style="width: 100%;">
+            Send Message <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Detail Glass Overlay Modal -->
+  <div class="modal-overlay" id="project-modal" onclick="closeProjectModal()">
+    <div class="modal-card" onclick="event.stopPropagation();">
+      <button class="modal-close-btn" onclick="closeProjectModal()">&times;</button>
+      <div id="modal-content-body">
+        <!-- Dynamically rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Himalay Puri | Full Stack Developer. Built with React.js, Node.js, Express &amp; MongoDB.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast-container">
+    <div class="toast" id="toast">
+      <i class="fa-solid fa-circle-check" style="color: var(--accent-green); font-size: 1.2rem;"></i>
+      <span id="toast-message">Action completed successfully!</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
